@@ -1,0 +1,6 @@
+<launch>
+    <!-- 加载配置文件到私有命名空间 -->
+    <node name="flight_controller_node" pkg="flight_controller" type="flight_controller_node" output="screen">
+        <rosparam file="$(find flight_controller)/config/flight_controller.yaml" command="load" ns="flight_controller_node" />
+    </node>
+</launch>

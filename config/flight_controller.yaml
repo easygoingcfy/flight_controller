@@ -1,0 +1,38 @@
+# ============================================================
+# flight_controller 节点配置文件
+# ============================================================
+
+# ----------------------------------------------------------
+# 主节点配置
+# ----------------------------------------------------------
+flight_controller_node:
+  # AsyncSpinner 线程数（最小为 1）
+  spinner_threads: 4
+  # 状态日志打印间隔（秒）
+  status_log_interval: 1.0
+
+# ----------------------------------------------------------
+# StateManager 配置 —— mavros 状态订阅与连接监测
+# ----------------------------------------------------------
+state_manager:
+  # 订阅的 mavros 状态话题
+  state_topic: "mavros/state"
+  # 订阅队列大小
+  queue_size: 10
+
+# ----------------------------------------------------------
+# OffboardManager 配置 —— 飞控模式管理与 Offboard 维持
+# ----------------------------------------------------------
+offboard_manager:
+  # mavros set_mode 服务名
+  set_mode_service: "mavros/set_mode"
+  # mavros arming 服务名
+  arming_service: "mavros/cmd/arming"
+  # 零速度指令发布话题
+  setpoint_velocity_topic: "mavros/setpoint_velocity/cmd_vel_unstamped"
+  # 零速度指令发布者队列大小
+  setpoint_pub_queue_size: 10
+  # 零速度指令发布频率（Hz）
+  setpoint_rate: 20.0
+  # 进入 OFFBOARD 模式前的等待时间（秒），确保 PX4 收到足够的 setpoint
+  pre_offboard_wait: 0.5
